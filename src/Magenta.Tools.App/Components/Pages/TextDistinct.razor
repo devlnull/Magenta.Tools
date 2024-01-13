@@ -1,0 +1,31 @@
+﻿@page "/text/distinct-lines"
+@inject ITextTransformer textTransformer
+@rendermode InteractiveServer
+
+<h3>Distinct Lines</h3>
+
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-5">
+            <textarea id="inputText" class="form-control" rows="20" @bind="@rawText" @bind:event="oninput" placeholder="Enter text here..."></textarea>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-panel">
+                <button class="btn btn-primary btn-block" @onclick="Process">Distinct Text</button>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <textarea id="outputText" class="form-control" rows="20" @bind="@result" @bind:event="oninput" readonly placeholder="Result will appear here..."></textarea>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string rawText;
+    private string result;
+    private void Process()
+    {
+        result = textTransformer.Transform(rawText);
+    }
+}
